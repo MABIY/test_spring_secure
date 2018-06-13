@@ -1,4 +1,4 @@
-package com.lh.spring.secure.oauth2;
+package com.lh.spring.secure.spring.oauth2;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

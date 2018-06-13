@@ -1,4 +1,4 @@
-package com.lh.spring.secure.oauth2;
+package com.lh.spring.secure.spring.oauth2;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,8 +58,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .scopes("select")
                 .authorities("client")
                 .secret(secret)
-                .accessTokenValiditySeconds(86400)
-                .refreshTokenValiditySeconds(2592000)
+                .accessTokenValiditySeconds(50)
+                .refreshTokenValiditySeconds(120)
                 .and();
 /*                .withClient(clientTest)
                 .resourceIds(DEMO_RESOURCE_ID)

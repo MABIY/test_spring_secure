@@ -1,4 +1,4 @@
-package com.lh.spring.secure.oauth2;
+package com.lh.spring.secure.spring.oauth2;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
