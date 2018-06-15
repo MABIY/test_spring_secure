@@ -60,7 +60,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .resourceIds(ResourceServerConfiguration.DEMO_RESOURCE_ID)
                 .authorizedGrantTypes("password", "refresh_token")
                 .scopes("select")
-  /*              .authorities("ROLE_lh")*/
+                .authorities("USER") // meaning
                 .secret(lh_secret)
                 .accessTokenValiditySeconds(86400)
                 .refreshTokenValiditySeconds(2592000)
@@ -69,7 +69,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .resourceIds(ResourceServerConfiguration.DEMO_RESOURCE_ID)
                 .authorizedGrantTypes("password", "refresh_token")
                 .scopes("select")
-       /*         .authorities("ROLE_baidu")*/
+                .authorities("USER")
                 .secret(baidu_secret)
                 .accessTokenValiditySeconds(86400)
                 .refreshTokenValiditySeconds(2592000);
