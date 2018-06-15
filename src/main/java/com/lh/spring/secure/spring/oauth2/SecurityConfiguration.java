@@ -1,5 +1,4 @@
 package com.lh.spring.secure.spring.oauth2;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,15 +13,21 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Value("${secure.username.lh}")
-    private String username;
+    private String lh_username;
     @Value("${secure.password.lh}")
-    private String password;
+    private String lh_password;
+
+    @Value("${secure.username.baidu}")
+    private String baidu_username;
+    @Value("${secure.password.baidu}")
+    private String baidu_password;
 
     @Bean
     @Override
     protected UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername(username).password(password).authorities("USER").build());
+        manager.createUser(User.withUsername(lh_username).password(lh_password).roles("lh").build());
+        manager.createUser(User.withUsername(baidu_username).password(baidu_password).roles("baidu").build());
         return manager;
     }
 

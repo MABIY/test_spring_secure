@@ -18,7 +18,6 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
-    private static final String DEMO_RESOURCE_ID = "order";
 
     @Value("${spring.redis.host}")
     private String host;
@@ -44,31 +43,36 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private UserDetailsService userDetailsService;
 
     @Value("${secure.client.lh}")
-    private String client;
+    private String lh_client;
     @Value("${secure.secret.lh}")
-    private String secret;
+    private String lh_secret;
+
+    @Value("${secure.client.baidu}")
+    private String baidu_client;
+    @Value("${secure.secret.baidu}")
+    private String baidu_secret;
 
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient(client)
-                .resourceIds(DEMO_RESOURCE_ID)
+                .withClient(lh_client)
+                .resourceIds(ResourceServerConfiguration.DEMO_RESOURCE_ID)
                 .authorizedGrantTypes("password", "refresh_token")
                 .scopes("select")
-                .authorities("client")
-                .secret(secret)
-                .accessTokenValiditySeconds(50)
-                .refreshTokenValiditySeconds(120)
-                .and();
-/*                .withClient(clientTest)
-                .resourceIds(DEMO_RESOURCE_ID)
-                .authorizedGrantTypes("password", "refresh_token")
-                .scopes("select")
-                .authorities("client")
-                .secret(secretTest)
+  /*              .authorities("ROLE_lh")*/
+                .secret(lh_secret)
                 .accessTokenValiditySeconds(86400)
-                .refreshTokenValiditySeconds(2592000);*/
+                .refreshTokenValiditySeconds(2592000)
+                .and()
+                .withClient(baidu_client)
+                .resourceIds(ResourceServerConfiguration.DEMO_RESOURCE_ID)
+                .authorizedGrantTypes("password", "refresh_token")
+                .scopes("select")
+       /*         .authorities("ROLE_baidu")*/
+                .secret(baidu_secret)
+                .accessTokenValiditySeconds(86400)
+                .refreshTokenValiditySeconds(2592000);
     }
 
     @Override

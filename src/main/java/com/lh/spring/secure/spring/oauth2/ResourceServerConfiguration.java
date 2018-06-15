@@ -6,12 +6,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-    private static final String DEMO_RESOURCE_ID = "order";
+    public static final String DEMO_RESOURCE_ID = "order";
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
@@ -30,11 +31,12 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .and()
                 .requestMatchers().anyRequest()
                 .and()
-                .anonymous()
-                .and()
                 .authorizeRequests()
-                .antMatchers("/test").authenticated()
+                .antMatchers("/baidu").hasAuthority("ROLE_baidu")
+                .antMatchers("/lh").hasAuthority("ROLE_lh")
                 //.antMatchers("/router/rest/order/**").authenticated()
-                .and().exceptionHandling();
+                .anyRequest().authenticated()
+                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+
     }
 }
