@@ -36,8 +36,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/baidu").hasAuthority("ROLE_baidu")
                 .antMatchers("/lh").hasAuthority("ROLE_lh")
 
-                .antMatchers("/baidu").permitAll()
-                .antMatchers("/test").authenticated()
+                .antMatchers("/public").permitAll()
                 //.antMatchers("/router/rest/order/**").authenticated()
                 .anyRequest().authenticated()
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
